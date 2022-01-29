@@ -1,68 +1,65 @@
 import React, { useState, useEffect } from 'react';
 
-import biblio1 from '../assets/img/bibliotecas/biblio1.jpg';
-import biblio2 from '../assets/img/bibliotecas/biblio2.jpg';
-import biblio3 from '../assets/img/bibliotecas/biblio3.jpg';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import bigImg1 from '../assets/img/bigImages/bigImg1.JPG';
+import bigImg2 from '../assets/img/bigImages/bigImg2.jpeg';
+import bigImg3 from '../assets/img/bigImages/bigImg3.jpeg';
+
+import smallImg1 from '../assets/img/smallImages/smallImg1.jpeg';
+import smallImg2 from '../assets/img/smallImages/smallImg2.JPG';
+import smallImg3 from '../assets/img/smallImages/smallImg3.JPG';
+
 
 
 export const AppRouter = () => {
 
-    const [stateAppRouter, setStateAppRouter] = useState({
-        backImg: biblio1,
-        contBackImg: 0,
-    });
-    const {backImg, contBackImg} = stateAppRouter;
-    // const [backImg, setBackImg] = useState(biblio1);
-    // const [contBackImg, setContBackImg] = useState(0);
+    const [backImg, setBackImg] = useState(bigImg1); //cambiar el background de la app
+    const [contBackImg, setContBackImg] = useState(1); // contador para controlar el cambio de img en el background
+
+    const matches = useMediaQuery('(min-width:415px)');
 
     useEffect(() => {
-        setInterval(() => {
-            logicaInterval();
-        }, 6000);
+        intervaloCambioDeImgBackg();
+        
         return () => {};
     }, []);
 
-    const logicaInterval = () => {
-        
-            console.log(contBackImg);
-            console.log(backImg);
-            if (contBackImg === 0) {
-                setStateAppRouter({
-                    ...stateAppRouter,
-                    backImg: biblio2,
-                    contBackImg: contBackImg + 1
-                })
-                // setBackImg(biblio2)
-                // setContBackImg(1)
-            } else if (contBackImg === 1) {
-                setStateAppRouter({
-                    ...stateAppRouter,
-                    backImg: biblio3,
-                    contBackImg: contBackImg + 1
-                })
-                // setBackImg(biblio3)
-                // setContBackImg(2)
-            } else {
-                setStateAppRouter({
-                    ...stateAppRouter,
-                    backImg: biblio1,
-                    contBackImg: 0
-                })
-                // setBackImg(biblio3)
-                // console.log(biblio1);
-                // setContBackImg(0)
-            }
+    useEffect(() => {
+      
+        if (contBackImg === 1) {
+            matches ? setBackImg(bigImg1) : setBackImg(smallImg1)
+        } else if (contBackImg === 2) {
+            matches ? setBackImg(bigImg2) : setBackImg(smallImg2)
+        } else {
+            matches ? setBackImg(bigImg3) : setBackImg(smallImg3)
+        }
+    
+      return () => {};
+    }, [contBackImg]);
 
-       
+    const intervaloCambioDeImgBackg = () => {
+        setInterval(() => {
+            setContBackImg(contBackImg => contBackImg === 3 ? 1 : contBackImg + 1);
+        }, 8000);
     }
+    
 
-    return <div >
+    return <div className="App" style={
+        {
+            backgroundImage: `url(${backImg})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize:'cover',
+            backgroundColor:'transparent',
+            backgroundPosition: 'center center',
+            transition: 'all 0.5s',
+            height:'100vh',
+            position: 'absolute',
+            width: '-webkit-fill-available',
+        }} 
+    >
+        
+        
 
-        <h1>AppRouter</h1>
-        <h3>{backImg}</h3>
-        <h3> contBackImg {contBackImg}</h3>
-        <div className="App" style={{backgroundImage: `url(${backImg})`, width:'100vh', height:'100vh'}} >
-
-        </div>
     </div>;
 };
