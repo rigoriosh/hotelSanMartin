@@ -21,16 +21,9 @@ export const AppRouter = () => {
             width: '-webkit-fill-available',
         }} 
     >
-        <nav
-            style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem"
-            }}
-        >
-            <Link to="/invoices">Invoices</Link> |{" "}
-            <Link to="/expenses">Expenses</Link>
-        </nav>
-        <Outlet />
+        <h1>AppRouter o HomePage</h1>
+        
+        {/* <Outlet /> */}
 
 
     </div>;

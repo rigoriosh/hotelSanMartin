@@ -1,8 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { getInvoice } from '../constants/data';
+import { useNavigate, useParams } from 'react-router-dom';
+import { deleteInvoice, getInvoice } from '../constants/data';
 
 export const Invoice = () => {
+  let navigate = useNavigate();
     let params = useParams();
     let invoice = getInvoice(parseInt(params.invoiceId, 10));
     return (
@@ -12,6 +13,16 @@ export const Invoice = () => {
             {invoice.name}: {invoice.number}
           </p>
           <p>Due Date: {invoice.due}</p>
+          <p>
+            <button
+              onClick={() => {
+                deleteInvoice(invoice.number);
+                navigate("/invoices");
+              }}
+            >
+              Delete
+            </button>
+          </p>
         </main>
       );
 };

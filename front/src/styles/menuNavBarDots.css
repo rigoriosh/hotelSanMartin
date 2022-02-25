@@ -1,0 +1,88 @@
+:root{
+    --backg1: #212532;
+    --backg11: rgba(33, 37, 50, 0.2);
+    --backg2: #333849;
+    --color1: #2dfc52;
+    --color2: rgba(0, 74, 173, 1 );
+}
+
+.fatherMemu{
+    display: flex;
+    align-items: center;
+}
+
+.clickFather{
+    width: 20px;
+    height: 35px;
+    /* background: var(--backg1); */
+    color: var(--backg1);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.navigationDots{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    background: var(--backg1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    transition-delay: 0.8s;
+}
+
+.navigationDots.active{
+    width: 200px;
+    height: 200px;
+    transition-delay: 0s;
+    background: var(--backg11)
+}
+
+.navigationDots span {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(calc(12px * var(--x)), calc(12px * var(--y)));
+    transition: transform 0.5s, width 0.5s, height 0.5s, background 0.5s;
+    transition-delay: calc(0.1s * var(--i));
+}
+
+.navigationDots.active span{
+    width: 45px;
+    height: 45px;
+    background: var(--backg2);
+    transform: translate(calc(60px * var(--x)), calc(60px * var(--y)));
+}
+
+.navigationDots span svg {
+    transition: 0.5s;
+    font-size: 0em;
+}
+
+.navigationDots.active span svg {
+    font-size: 1.35em;
+    color: #fff;
+}
+
+.navigationDots.active span:hover svg {
+    color: var(--color1);
+    filter: drop-shadow(0 0 2px var(--color1)) drop-shadow(0 0 5px var(--color1)) drop-shadow(0 0 15px var(--color1));
+}
+
+.navigationDots.active span.activo svg {
+    color: var(--color1);
+    filter: drop-shadow(0 0 2px var(--color1)) drop-shadow(0 0 5px var(--color1)) drop-shadow(0 0 15px var(--color1));
+}

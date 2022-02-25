@@ -38,3 +38,9 @@
     transform: rotate(360deg);
   }
 }
+
+
+.logo{
+  background: var(--color2);
+  width: 100%;
+}
